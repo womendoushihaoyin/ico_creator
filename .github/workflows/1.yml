@@ -9,7 +9,16 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-      
+    
+    - name: Install Homebrew
+      run: |
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        echo "/usr/local/bin" >> $GITHUB_PATH
+
+    - name: Install ImageMagick
+      run: |
+        brew install imagemagick
+
     - name: Generate icons
       run: |
         mkdir -p tmp.iconset
