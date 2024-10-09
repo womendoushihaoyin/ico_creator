@@ -4,34 +4,25 @@ on: [push]
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-14
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-    
-    - name: Install Homebrew
-      run: |
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        echo "/usr/local/bin" >> $GITHUB_PATH
-
-    - name: Install ImageMagick
-      run: |
-        brew install imagemagick
 
     - name: Generate icons
       run: |
         mkdir -p tmp.iconset
-        sips -z 16 16 pic.jpg --out tmp.iconset/icon_16x16.jpg
-        sips -z 32 32 pic.jpg --out tmp.iconset/icon_16x16@2x.jpg
-        sips -z 32 32 pic.jpg --out tmp.iconset/icon_32x32.jpg
-        sips -z 64 64 pic.jpg --out tmp.iconset/icon_32x32@2x.jpg
-        sips -z 128 128 pic.jpg --out tmp.iconset/icon_128x128.jpg
-        sips -z 256 256 pic.jpg --out tmp.iconset/icon_128x128@2x.jpg
-        sips -z 256 256 pic.jpg --out tmp.iconset/icon_256x256.jpg
-        sips -z 512 512 pic.jpg --out tmp.iconset/icon_256x256@2x.jpg
-        sips -z 512 512 pic.jpg --out tmp.iconset/icon_512x512.jpg
-        sips -z 1024 1024 pic.jpg --out tmp.iconset/icon_512x512@2x.jpg
+        sips -z 16 16 pic.png --out tmp.iconset/icon_16x16.png
+        sips -z 32 32 pic.png --out tmp.iconset/icon_16x16@2x.png
+        sips -z 32 32 pic.png --out tmp.iconset/icon_32x32.png
+        sips -z 64 64 pic.png --out tmp.iconset/icon_32x32@2x.png
+        sips -z 128 128 pic.png --out tmp.iconset/icon_128x128.png
+        sips -z 256 256 pic.png --out tmp.iconset/icon_128x128@2x.png
+        sips -z 256 256 pic.png --out tmp.iconset/icon_256x256.png
+        sips -z 512 512 pic.png --out tmp.iconset/icon_256x256@2x.png
+        sips -z 512 512 pic.png --out tmp.iconset/icon_512x512.png
+        sips -z 1024 1024 pic.png --out tmp.iconset/icon_512x512@2x.png
 
         iconutil -c icns tmp.iconset -o logo.icns
 
